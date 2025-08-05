@@ -1,23 +1,54 @@
 /**
  * @file ExampleUsage.ts
- * @description Example demonstrating how to use the unified atoms
+ * @description Comprehensive example demonstrating all SS-Fusion atoms with proper usage patterns.
+ * 
+ * This example showcases:
+ * - Unified Button component (text, icon, and styled variants)
+ * - Label component with different typography variants
+ * - TextBox component with validation and state management
+ * - ProgressBar component with reactive progress tracking
+ * - SlicedImage component for scalable UI panels
+ * - Proper reactive state management with Fusion
+ * - Theme integration and consistent styling
+ * 
+ * @example
+ * // To use this example in your game:
+ * const demoUI = CreateExampleUI();
+ * demoUI.Parent = PlayerGui.ScreenGui;
+ * 
+ * @author Soul Steel Alpha Development Team
+ * @since 1.0.0
  */
 
 import Fusion, { Value } from "@rbxts/fusion";
 import { Label, Button, TextBox, ProgressBar, SlicedImage } from "../atoms";
 import { ImageConstants, MenuButtonImageMap } from "../types/image-assets";
 
-// Example of using the new atoms together
+/**
+ * Creates a comprehensive UI demo showcasing all SS-Fusion atoms.
+ * 
+ * This function demonstrates proper usage patterns including:
+ * - Reactive state management with Fusion Values
+ * - Component composition and layout
+ * - Event handling and user interactions
+ * - Theme integration and consistent styling
+ * 
+ * @returns A Frame containing the complete demo UI
+ */
 export function CreateExampleUI() {
+	// Reactive state values for demo interactivity
 	const inputText = Value("");
 	const displayText = Value("Hello, World!");
-	const progressValue = Value(0.75);
+	const progressValue = Value(0.75); // 75% progress
 
+	// Main container with dark background
 	const container = new Instance("Frame");
 	container.Size = new UDim2(1, 0, 1, 0);
 	container.BackgroundColor3 = Color3.fromRGB(50, 50, 50);
 
-	// Header label
+	// === TYPOGRAPHY DEMONSTRATION ===
+	
+	// Main heading using Label component
 	const header = Label({
 		Name: "Header",
 		text: "SS-Fusion Component Demo",
@@ -26,7 +57,9 @@ export function CreateExampleUI() {
 		Position: new UDim2(0, 0, 0, 10),
 	});
 
-	// Progress bar example
+	// === PROGRESS VISUALIZATION ===
+	
+	// Progress bar demonstrating reactive progress tracking
 	const progressBar = ProgressBar({
 		Name: "ExampleProgress",
 		progress: progressValue,
@@ -35,7 +68,9 @@ export function CreateExampleUI() {
 		Position: new UDim2(0.1, 0, 0, 70),
 	});
 
-	// Text input
+	// === TEXT INPUT DEMONSTRATION ===
+	
+	// Text input with placeholder and change handling
 	const textInput = TextBox({
 		Name: "TextInput",
 		placeholder: "Enter some text...",
@@ -43,11 +78,14 @@ export function CreateExampleUI() {
 		Size: new UDim2(0.8, 0, 0, 40),
 		Position: new UDim2(0.1, 0, 0, 100),
 		onChanged: (text) => {
+			// Update display text in real-time as user types
 			print("Text changed:", text);
 		},
 	});
 
-	// Display label
+	// === REACTIVE TEXT DISPLAY ===
+	
+	// Label that displays reactive text content
 	const displayLabel = Label({
 		Name: "DisplayLabel",
 		text: displayText,
@@ -56,7 +94,9 @@ export function CreateExampleUI() {
 		Position: new UDim2(0.1, 0, 0, 150),
 	});
 
-	// Primary button (text)
+	// === BUTTON DEMONSTRATIONS ===
+	
+	// Primary action button (text button)
 	const primaryButton = Button({
 		Name: "PrimaryButton",
 		text: "Update Display",
@@ -64,11 +104,12 @@ export function CreateExampleUI() {
 		Size: new UDim2(0, 150, 0, 40),
 		Position: new UDim2(0.1, 0, 0, 190),
 		onClick: () => {
+			// Update display text with input content or default message
 			displayText.set(inputText.get() || "Nothing entered!");
 		},
 	});
 
-	// Secondary button (text)
+	// Secondary action button (text button)
 	const secondaryButton = Button({
 		Name: "SecondaryButton",
 		text: "Clear All",
@@ -76,12 +117,13 @@ export function CreateExampleUI() {
 		Size: new UDim2(0, 150, 0, 40),
 		Position: new UDim2(0.1, 200, 0, 190),
 		onClick: () => {
+			// Reset all demo values to defaults
 			inputText.set("");
 			displayText.set("Cleared!");
 		},
 	});
 
-	// Icon button example
+	// Icon button demonstration (unified button in icon mode)
 	const iconButton = Button({
 		Name: "IconButton",
 		icon: MenuButtonImageMap.Settings,
@@ -93,7 +135,9 @@ export function CreateExampleUI() {
 		},
 	});
 
-	// Sliced image background example
+	// === SLICED IMAGE DEMONSTRATION ===
+	
+	// Background panel using 9-slice scaling for scalable borders
 	const backgroundPanel = SlicedImage({
 		Name: "BackgroundPanel",
 		imageId: ImageConstants.Borders.GothicMetal,
@@ -103,7 +147,9 @@ export function CreateExampleUI() {
 		sliceScale: 0.5,
 	});
 
-	// Add components to container
+	// === ASSEMBLY ===
+	
+	// Add all components to the main container
 	header.Parent = container;
 	progressBar.Parent = container;
 	textInput.Parent = container;

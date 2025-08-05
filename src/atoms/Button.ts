@@ -2,7 +2,36 @@
  * @file Button.ts
  * @module Button
  * @layer Client/UI/Atoms
- * @description Reusable button component with multiple variants and states.
+ * @description Unified button component that supports both text and icon modes with multiple variants and states.
+ * 
+ * This component consolidates the functionality of text buttons and icon buttons into a single,
+ * flexible component that can handle various use cases while maintaining consistent theming.
+ *
+ * @example
+ * // Text button
+ * const saveButton = Button({
+ *   text: "Save",
+ *   variant: "primary",
+ *   onClick: () => saveData()
+ * });
+ * 
+ * @example
+ * // Icon button
+ * const settingsButton = Button({
+ *   icon: "rbxassetid://123456789",
+ *   variant: "icon",
+ *   size: "medium",
+ *   onClick: () => openSettings()
+ * });
+ * 
+ * @example
+ * // Custom styled button with background image
+ * const styledButton = Button({
+ *   text: "Epic Button",
+ *   backgroundImage: "rbxassetid://987654321",
+ *   variant: "accent",
+ *   onClick: () => doEpicAction()
+ * });
  *
  * @author Soul Steel Alpha Development Team
  * @since 1.0.0
@@ -11,42 +40,127 @@
 import Fusion, { Children, Computed, New, OnEvent, Value } from "@rbxts/fusion";
 import { defaultColorScheme, spacing } from "../utils/theme";
 
+/**
+ * Props interface for the unified Button component.
+ * Supports both text and icon buttons with comprehensive theming options.
+ */
 export interface ButtonProps extends Fusion.PropertyTable<Frame> {
-	/** Button text content (for text buttons) */
+	/** 
+	 * Button text content (for text buttons).
+	 * Can be a static string or reactive StateObject.
+	 * @example "Save", "Cancel", "Submit"
+	 */
 	text?: Fusion.StateObject<string> | string;
 
-	/** Icon asset ID (for icon buttons) */
+	/** 
+	 * Icon asset ID (for icon buttons).
+	 * Should be a valid Roblox asset ID string.
+	 * @example "rbxassetid://123456789"
+	 */
 	icon?: string;
 
-	/** Background image asset ID (for styled buttons) */
+	/** 
+	 * Background image asset ID (for styled buttons).
+	 * Adds a decorative background image behind the button content.
+	 * @example "rbxassetid://987654321"
+	 */
 	backgroundImage?: string;
 
-	/** Visual variant of the button */
+	/** 
+	 * Visual variant of the button.
+	 * - primary: Main action button (blue theme)
+	 * - secondary: Secondary action (gray theme)
+	 * - accent: Special highlight (purple theme)
+	 * - danger: Destructive actions (red theme)
+	 * - ghost: Transparent with border
+	 * - icon: Optimized for icon-only buttons
+	 * @default "primary"
+	 */
 	variant?: "primary" | "secondary" | "accent" | "danger" | "ghost" | "icon";
 
-	/** Size variant */
+	/** 
+	 * Size variant affecting dimensions and font size.
+	 * - small: 32px height, 14px font
+	 * - medium: 40px height, 16px font
+	 * - large: 48px height, 18px font
+	 * @default "medium"
+	 */
 	size?: "small" | "medium" | "large";
 
-	/** Whether the button is disabled */
+	/** 
+	 * Whether the button is disabled.
+	 * Disabled buttons cannot be clicked and have muted styling.
+	 * Can be reactive for dynamic disable states.
+	 * @default false
+	 */
 	disabled?: Fusion.StateObject<boolean> | boolean;
 
-	/** Click handler */
+	/** 
+	 * Click handler called when the button is activated.
+	 * Only fires if the button is not disabled.
+	 */
 	onClick?: () => void;
 
-	/** Hover handlers */
+	/** 
+	 * Hover enter handler for custom hover effects.
+	 * Called when mouse enters the button area.
+	 */
 	onMouseEnter?: () => void;
+
+	/** 
+	 * Hover leave handler for custom hover effects.
+	 * Called when mouse leaves the button area.
+	 */
 	onMouseLeave?: () => void;
 
-	/** Custom content instead of text/icon */
+	/** 
+	 * Custom content instead of text/icon.
+	 * Allows for advanced button layouts with custom children.
+	 * @example [customIcon, customLabel, badge]
+	 */
 	children?: Instance[];
 
-	/** Icon color (for icon buttons) */
+	/** 
+	 * Icon color override (for icon buttons).
+	 * Overrides the default theme-based icon color.
+	 * @default Theme-based color
+	 */
 	iconColor?: Color3;
 
-	/** Icon size as percentage of button size */
+	/** 
+	 * Icon size as percentage of button size.
+	 * Controls how much of the button the icon occupies.
+	 * @default 0.6 (60% of button size)
+	 * @range 0.1 to 1.0
+	 */
 	iconSize?: number;
 }
 
+/**
+ * Creates a unified button component that can display text, icons, or custom content.
+ * 
+ * This component automatically detects whether to render as a text or icon button based on props.
+ * It provides consistent theming, hover states, and accessibility features.
+ * 
+ * @param props - Configuration object for the button
+ * @returns A Frame containing the button with proper interaction handling
+ * 
+ * @example
+ * // Simple text button
+ * const button = Button({
+ *   text: "Click me",
+ *   onClick: () => print("Clicked!")
+ * });
+ * 
+ * @example
+ * // Icon button with custom color
+ * const iconBtn = Button({
+ *   icon: "rbxassetid://123",
+ *   variant: "icon",
+ *   iconColor: Color3.fromRGB(255, 100, 100),
+ *   onClick: handleIconClick
+ * });
+ */
 export function Button(props: ButtonProps): Frame {
 	// State management
 	const isHovered = Value(false);
