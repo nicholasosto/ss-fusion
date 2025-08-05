@@ -1,3 +1,5 @@
-export * from "./IconButton";
 export * from "./ProgressBar";
-export * from "./SliceImageFrame";
+export * from "./SlicedImage";
+export * from "./Label";
+export * from "./Button";
+export * from "./TextBox";

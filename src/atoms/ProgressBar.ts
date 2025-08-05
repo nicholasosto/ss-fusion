@@ -9,6 +9,7 @@
  */
 
 import Fusion, { Children, Computed, New, Value } from "@rbxts/fusion";
+import { defaultColorScheme } from "../utils/theme";
 
 export interface ProgressBarProps extends Fusion.PropertyTable<Frame> {
 	/** Current progress value (0-1 for percentage, or actual value if using maxValue) */
@@ -18,7 +19,13 @@ export interface ProgressBarProps extends Fusion.PropertyTable<Frame> {
 	maxValue?: Fusion.StateObject<number>;
 
 	/** Color of the progress fill */
-	fillColor: Color3;
+	fillColor?: Color3;
+
+	/** Background color of the progress bar container */
+	backgroundColor?: Color3;
+
+	/** Border color of the progress bar container */
+	borderColor?: Color3;
 
 	/** Direction of fill: "horizontal" | "vertical" */
 	direction?: "horizontal" | "vertical";
@@ -42,6 +49,9 @@ export function ProgressBar(props: ProgressBarProps): Frame {
 	const showLabel = props.showLabel ?? false;
 	const labelColor = props.labelColor ?? Color3.fromRGB(255, 255, 255);
 	const minSize = props.minSize ?? 4;
+	const fillColor = props.fillColor ?? defaultColorScheme.Primary;
+	const backgroundColor = props.backgroundColor ?? Color3.fromRGB(40, 40, 40);
+	const borderColor = props.borderColor ?? Color3.fromRGB(100, 100, 100);
 
 	// Calculate fill percentage
 	const fillPercentage = Computed(() => {
@@ -103,16 +113,18 @@ export function ProgressBar(props: ProgressBarProps): Frame {
 		Size: props.Size ?? new UDim2(1, 0, 0, minSize),
 		Position: props.Position,
 		AnchorPoint: props.AnchorPoint,
-		BackgroundColor3: props.BackgroundColor3 ?? Color3.fromRGB(40, 40, 40),
-		BorderColor3: props.BorderColor3 ?? Color3.fromRGB(100, 100, 100),
+		BackgroundColor3: backgroundColor,
+		BorderColor3: borderColor,
+		BorderSizePixel: props.BorderSizePixel ?? 1,
 		ZIndex: props.ZIndex,
+		LayoutOrder: props.LayoutOrder,
 
 		[Children]: [
 			// Background fill
 			New("Frame")({
 				Name: "Background",
 				Size: new UDim2(1, 0, 1, 0),
-				BackgroundColor3: Color3.fromRGB(20, 20, 20),
+				BackgroundColor3: defaultColorScheme.Surface,
 				BorderSizePixel: 0,
 			}),
 
@@ -121,7 +133,7 @@ export function ProgressBar(props: ProgressBarProps): Frame {
 				Name: "Fill",
 				Size: fillSize,
 				Position: fillPosition,
-				BackgroundColor3: props.fillColor,
+				BackgroundColor3: fillColor,
 				BorderSizePixel: 0,
 				ZIndex: 2,
 			}),

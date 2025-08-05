@@ -7,7 +7,7 @@
 import Fusion, { Value, New, Computed, OnEvent, Children } from "@rbxts/fusion";
 import { UI_SIZES, LAYOUTS } from "../types/ui-constants";
 /* -- Atoms -- */
-import { IconButton, ProgressBar } from "../atoms";
+import { Button, ProgressBar } from "../atoms";
 
 export interface CooldownButtonProps extends Fusion.PropertyTable<Frame> {
 	icon: string; // Icon asset ID
@@ -42,12 +42,13 @@ export function CooldownButton(props: CooldownButtonProps) {
 	}
 
 	// Main button with icon
-	const button = IconButton({
+	const button = Button({
 		Name: props.Name ?? "CooldownButton",
 		AnchorPoint: new Vector2(0.5, 0.5),
 		Position: props.Position ?? new UDim2(0.5, 0, 0.5, 0), // Centered by default
 		Size: new UDim2(1, 0, 0.8, 0),
 		icon: props.icon,
+		variant: "icon",
 		onClick: () => {
 			if (isOnCooldown.get()) {
 				print("Button is on cooldown, cannot click.");
