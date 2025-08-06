@@ -70,6 +70,7 @@ SS-Fusion follows the **Atomic Design** methodology, providing components at dif
 
 ### Atoms (Basic Building Blocks)
 
+- **`Avatar`** - User profile images, player thumbnails, and fallback displays
 - **`Button`** - Unified text/icon button with multiple variants
 - **`Label`** - Typography component with consistent theming
 - **`TextBox`** - Input component with validation and focus states
@@ -85,6 +86,40 @@ SS-Fusion follows the **Atomic Design** methodology, providing components at dif
 - Complex UI sections and layout templates
 
 ## 📋 Components Overview
+
+### Avatar Component
+
+User profile images, player thumbnails, and fallback displays with customizable shapes and status indicators.
+
+```typescript
+// Player thumbnail with status
+const playerAvatar = Avatar({
+  UserId: 123456,
+  Size: new UDim2(0, 64, 0, 64),
+  Shape: "Circle",
+  ShowStatus: true,
+  StatusColor: Color3.fromRGB(34, 197, 94), // Green for online
+  onClick: () => openPlayerProfile(123456)
+});
+
+// Custom image avatar
+const customAvatar = Avatar({
+  Image: "rbxasset://textures/face.png",
+  Shape: "Rounded",
+  BorderThickness: 2,
+  BorderColor: Color3.fromRGB(99, 102, 241)
+});
+
+// Fallback text avatar
+const initialsAvatar = Avatar({
+  FallbackText: "JD",
+  BackgroundColor: Color3.fromHex("#6366f1"),
+  TextColor: Color3.new(1, 1, 1)
+});
+```
+
+**Available Shapes:** `Circle` | `Square` | `Rounded`
+**Features:** Player thumbnails, custom images, fallback text, status indicators, click handling
 
 ### Button Component
 

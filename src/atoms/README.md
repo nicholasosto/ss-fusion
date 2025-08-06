@@ -13,7 +13,43 @@ Each atom is designed to:
 
 ## Available Atoms
 
-### 🔘 Button
+### � Avatar
+User profile images, player thumbnails, and fallback displays with multiple shapes and status indicators.
+
+```typescript
+import { Avatar } from "ss-fusion";
+
+// Player thumbnail
+const playerAvatar = Avatar({
+  UserId: 123456,
+  Size: new UDim2(0, 64, 0, 64),
+  Shape: "Circle",
+  ShowStatus: true,
+  StatusColor: Color3.fromRGB(34, 197, 94) // Green for online
+});
+
+// Custom image avatar
+const customAvatar = Avatar({
+  Image: "rbxasset://textures/face.png",
+  Size: new UDim2(0, 48, 0, 48),
+  Shape: "Rounded",
+  BorderThickness: 2,
+  BorderColor: Color3.fromRGB(99, 102, 241)
+});
+
+// Fallback text avatar
+const textAvatar = Avatar({
+  FallbackText: "JD",
+  BackgroundColor: Color3.fromHex("#6366f1"),
+  TextColor: Color3.new(1, 1, 1),
+  Size: new UDim2(0, 40, 0, 40)
+});
+```
+
+**Shapes**: `Circle` | `Square` | `Rounded`
+**Features**: Player thumbnails, custom images, fallback text, status indicators, borders
+
+### �🔘 Button
 Unified button component supporting both text and icon modes with multiple variants.
 
 ```typescript
@@ -171,30 +207,45 @@ const customButton = Button({
 Atoms are designed to work well together:
 
 ```typescript
-// Form example using multiple atoms
-const createLoginForm = () => {
-  const username = Value("");
-  const password = Value("");
+// User profile example using multiple atoms
+const createUserProfile = (userId: number) => {
+  const username = Value("Player123");
+  const isOnline = Value(true);
+  const health = Value(85);
+  const maxHealth = Value(100);
   
   return [
-    Label({ text: "Login", variant: "heading" }),
-    
-    TextBox({
-      placeholder: "Username",
-      value: username,
-      onChanged: (text) => username.set(text)
+    // Profile header with avatar
+    Avatar({
+      UserId: userId,
+      Size: new UDim2(0, 64, 0, 64),
+      Shape: "Circle",
+      ShowStatus: true,
+      StatusColor: isOnline.get() ? Color3.fromRGB(34, 197, 94) : Color3.fromRGB(156, 163, 175)
     }),
     
-    TextBox({
-      placeholder: "Password",
-      value: password,
-      validate: (text) => text.length >= 8
+    Label({ 
+      text: username, 
+      variant: "heading" 
+    }),
+    
+    // Health display
+    Label({ 
+      text: "Health", 
+      variant: "caption" 
+    }),
+    
+    ProgressBar({
+      progress: health,
+      maxValue: maxHealth,
+      fillColor: Color3.fromRGB(255, 100, 100),
+      showLabel: true
     }),
     
     Button({
-      text: "Login",
+      text: "View Profile",
       variant: "primary",
-      onClick: () => handleLogin(username.get(), password.get())
+      onClick: () => openProfile(userId)
     })
   ];
 };
