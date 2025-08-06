@@ -1,15 +1,24 @@
 {
   "name": "@trembus/ss-fusion",
   "version": "1.0.3",
-  "description": "",
+  "description": "A modern, reactive UI component library for Roblox built with TypeScript and Fusion",
   "main": "out/init.lua",
   "scripts": {
     "build": "rbxtsc",
     "watch": "rbxtsc -w",
     "prepublishOnly": "pnpm run build"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "roblox",
+    "ui",
+    "components",
+    "typescript",
+    "fusion",
+    "reactive",
+    "game-development",
+    "roblox-ts"
+  ],
+  "author": "Soul Steel Alpha Development Team",
   "license": "ISC",
   "packageManager": "pnpm@10.13.1",
   "types": "out/index.d.ts",

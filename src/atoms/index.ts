@@ -5,6 +5,7 @@
  * Atoms are the smallest, most basic UI components that serve as building blocks
  * for more complex molecules, organisms, and templates. This library includes:
  * 
+ * - **Avatar**: User profile images, player thumbnails, and fallback displays
  * - **Button**: Unified text and icon button with multiple variants
  * - **Label**: Typography component with consistent theming
  * - **TextBox**: Input component with validation and focus states
@@ -20,14 +21,13 @@
  * 
  * @example Basic Usage
  * ```typescript
- * import { Button, Label, TextBox } from "ss-fusion/atoms";
+ * import { Avatar, Button, Label, TextBox } from "ss-fusion/atoms";
  * 
- * // Create a simple login form
- * const loginForm = [
- *   Label({ text: "Login", variant: "heading" }),
- *   TextBox({ placeholder: "Username" }),
- *   TextBox({ placeholder: "Password" }),
- *   Button({ text: "Sign In", variant: "primary" })
+ * // Create a user profile header
+ * const userProfile = [
+ *   Avatar({ UserId: 123456, Size: UDim2.fromOffset(64, 64) }),
+ *   Label({ text: "Welcome back!", variant: "heading" }),
+ *   Button({ text: "View Profile", variant: "primary" })
  * ];
  * ```
  * 
@@ -37,6 +37,7 @@
  * @version 2.0.0
  */
 
+export * from "./Avatar";
 export * from "./Button";
 export * from "./Label";
 export * from "./TextBox";

@@ -170,7 +170,7 @@ export function Button(props: ButtonProps): Frame {
 	const variant = props.variant ?? "primary";
 	const size = props.size ?? "medium";
 	const text = props.text ?? "";
-	const iconSize = props.iconSize ?? 0.6;
+	const iconSize = props.iconSize ?? 0.8;
 	const iconColor = props.iconColor ?? Color3.fromRGB(255, 255, 255);
 
 	// Determine if this is an icon button

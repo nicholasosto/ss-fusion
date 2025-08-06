@@ -1,9 +1,9 @@
 import { spacing } from "../utils/theme";
 
 export const UI_SIZES = {
-    BUTTON_COOLDOWN: new UDim2(0, 100, 0, 50), // Default size for cooldown button
+    BUTTON_COOLDOWN: new UDim2(0, 70, 0, 90), // Default size for cooldown button
     BUTTON_ICON: new UDim2(0, 50, 0, 50), // Default size for icon button
-    PROGRESS_BAR: new UDim2(0, 100, 0, 20), // Default size for progress bar
+    PROGRESS_BAR: new UDim2(0, 70, 0, 20), // Default size for progress bar
 };
 
 export const UI_FLEX_SIZES = {
