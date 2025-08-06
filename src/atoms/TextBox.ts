@@ -300,7 +300,7 @@ export function TextBox(props: TextBoxProps): Frame {
 		
 		// Update state if it's our internal state
 		if (!props.value && "set" in currentText) {
-			(currentText as any).set(newText);
+			(currentText as Fusion.Value<string>).set(newText);
 		}
 		
 		// Call change handler

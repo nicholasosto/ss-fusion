@@ -1,6 +1,6 @@
 {
-  "name": "@rbxts/ss-fusion",
-  "version": "1.0.0",
+  "name": "@trembus/ss-fusion",
+  "version": "1.0.2",
   "description": "",
   "main": "out/init.lua",
   "scripts": {

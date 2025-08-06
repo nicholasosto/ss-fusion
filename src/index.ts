@@ -1,6 +1,8 @@
 // SS-Fusion Component Library
 // A custom component library built on @rbxts/fusion
 
+export * from "./examples/ExampleUsage";
+
 // Export types
 export * from "./types/common";
 

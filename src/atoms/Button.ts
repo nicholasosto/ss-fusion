@@ -300,7 +300,9 @@ export function Button(props: ButtonProps): Frame {
 	const buttonContent: Instance[] = [];
 
 	if (props.children) {
-		buttonContent.push(...props.children);
+		for (const child of props.children) {
+			buttonContent.push(child);
+		}
 	} else if (isIconButton && props.icon) {
 		// Icon button content
 		const iconLabel = New("ImageLabel")({
