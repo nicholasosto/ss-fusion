@@ -63,7 +63,8 @@ export function CooldownButton(props: CooldownButtonProps) {
 	const cooldownBar = ProgressBar({
 		Name: "CooldownProgressBar",
 		Size: new UDim2(1, 0, 0.2, 0), // Fill the bottom part of the button
-		progress: cooldownProgress,
+		currentValue: cooldownRemaining,
+		maxValue: Value(props.cooldown),
 		fillColor: Color3.fromRGB(255, 100, 100), // Red for cooldown
 		showLabel: true,
 		labelText: cooldownText,

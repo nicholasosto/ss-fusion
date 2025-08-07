@@ -62,7 +62,8 @@ export function CreateExampleUI() {
 	// Progress bar demonstrating reactive progress tracking
 	const progressBar = ProgressBar({
 		Name: "ExampleProgress",
-		progress: progressValue,
+		currentValue: progressValue,
+		maxValue: Value(1), // 100% max
 		showLabel: true,
 		Size: new UDim2(0.8, 0, 0, 20),
 		Position: new UDim2(0.1, 0, 0, 70),

@@ -55,14 +55,14 @@ export interface ProgressBarProps extends Fusion.PropertyTable<Frame> {
 	 * - If maxValue is not provided: percentage from 0-1 (e.g., 0.75 = 75%)
 	 * @example currentHealth, expPercentage
 	 */
-	progress: Fusion.StateObject<number>;
+	currentValue: Fusion.Value<number>;
 
 	/** 
 	 * Maximum value for calculating percentage.
 	 * When provided, progress is treated as current/max instead of percentage.
 	 * @example maxHealth, maxMana
 	 */
-	maxValue?: Fusion.StateObject<number>;
+	maxValue: Fusion.Value<number>;
 
 	/** 
 	 * Color of the progress fill bar.
@@ -160,7 +160,7 @@ export function ProgressBar(props: ProgressBarProps): Frame {
 
 	// Calculate fill percentage
 	const fillPercentage = Computed(() => {
-		const progress = props.progress.get();
+		const progress = props.currentValue.get();
 		const maxValue = props.maxValue?.get();
 
 		if (maxValue !== undefined) {
@@ -200,7 +200,7 @@ export function ProgressBar(props: ProgressBarProps): Frame {
 			return props.labelText.get();
 		}
 
-		const progress = props.progress.get();
+		const progress = props.currentValue.get();
 		const maxValue = props.maxValue?.get();
 
 		if (maxValue !== undefined) {
