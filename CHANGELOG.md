@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.3] - 2025-08-06
 
+## [1.1.0] - 2025-08-08
+
+### Added
+- Tab system following Atomic design:
+  - Atom: TabButton
+  - Molecules: TabBar, TabPanels (keep-mounted and mount-only-active)
+  - Organism: TabGroup, controlled via external Value<string>
+- Types: TabSpec, TabGroupProps
+
+### Internal
+- Barrel exports updated and top-level index exports organisms and new types.
+
+
 ### Added
 - Comprehensive project documentation and README
 - Contributing guidelines for community contributors
