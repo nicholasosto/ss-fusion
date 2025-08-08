@@ -15,4 +15,8 @@ export * from "./atoms";
 // Export molecules
 export * from "./molecules";
 
-// TODO: Export organisms and templates as they are implemented
+// Export organisms
+export * from "./organisms";
+
+// Export additional types
+export * from "./types/tabs";

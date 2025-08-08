@@ -42,3 +42,4 @@ export * from "./Label";
 export * from "./TextBox";
 export * from "./ProgressBar";
 export * from "./SlicedImage";
+export * from "./TabButton";
