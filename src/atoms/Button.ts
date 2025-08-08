@@ -50,7 +50,7 @@ export interface ButtonProps extends Fusion.PropertyTable<Frame> {
 	 * Can be a static string or reactive StateObject.
 	 * @example "Save", "Cancel", "Submit"
 	 */
-	text?: Fusion.StateObject<string> | string;
+	text?: Fusion.Value<string> | string;
 
 	/** 
 	 * Icon asset ID (for icon buttons).
@@ -93,7 +93,7 @@ export interface ButtonProps extends Fusion.PropertyTable<Frame> {
 	 * Can be reactive for dynamic disable states.
 	 * @default false
 	 */
-	disabled?: Fusion.StateObject<boolean> | boolean;
+	disabled?: Fusion.Value<boolean> | boolean;
 
 	/** 
 	 * Click handler called when the button is activated.

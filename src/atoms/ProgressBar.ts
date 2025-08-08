@@ -103,7 +103,7 @@ export interface ProgressBarProps extends Fusion.PropertyTable<Frame> {
 	 * If not provided, shows "current/max" or "percentage%" automatically.
 	 * @example "Level 25", "75% Complete"
 	 */
-	labelText?: Fusion.StateObject<string>;
+	labelText?: Fusion.Value<string> | Fusion.Computed<string>;
 
 	/** 
 	 * Color of the label text.

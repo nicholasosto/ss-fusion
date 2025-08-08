@@ -1,4 +1,5 @@
-import Fusion from "@rbxts/fusion";
+import type Fusion from "@rbxts/fusion";
+import type { CanBeState, Value } from "@rbxts/fusion";
 
 /** Describes an individual tab in a TabGroup */
 export interface TabSpec {
@@ -9,7 +10,7 @@ export interface TabSpec {
 	/** Optional icon asset id for ImageLabel/ImageButton */
 	icon?: string;
 	/** Disable flag (static or reactive) */
-	disabled?: boolean | Fusion.StateObject<boolean>;
+	disabled?: CanBeState<boolean>;
 	/** Factory that returns the panel Instance for this tab */
 	panel: () => Instance;
 }
@@ -17,7 +18,7 @@ export interface TabSpec {
 /** Props to configure a TabGroup organism */
 export interface TabGroupProps extends Fusion.PropertyTable<Frame> {
 	/** External source of truth for active tab id */
-	active: Fusion.Value<string>;
+	active: Value<string>;
 	/** All tab specifications */
 	tabs: TabSpec[];
 	/** Optional layout orientation */

@@ -18,7 +18,7 @@
  * @example
  * // Reactive body text
  * const status = Label({
- *   text: statusText, // StateObject<string>
+ *   text: statusText, // Value<string>
  *   variant: "body",
  *   textColor: Color3.fromRGB(100, 255, 100)
  * });
@@ -49,7 +49,7 @@ export interface LabelProps extends Fusion.PropertyTable<TextLabel> {
 	 * Can be static string or reactive StateObject for dynamic content.
 	 * @example "Hello World", playerNameState
 	 */
-	text: Fusion.StateObject<string> | string;
+	text: Fusion.Value<string> | string;
 
 	/** 
 	 * Typography variant affecting size and weight.

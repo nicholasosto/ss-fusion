@@ -7,7 +7,7 @@ export function TabButton(tab: TabSpec, active: Fusion.Value<string>) {
 	const isActive = Computed(() => active.get() === tab.id);
 	const isDisabled = typeOf(tab.disabled) === "boolean"
 		? Value(tab.disabled as boolean)
-		: (tab.disabled as Fusion.StateObject<boolean> | undefined) ?? Value(false);
+		: (tab.disabled as Fusion.Value<boolean> | undefined) ?? Value(false);
 
 	return New("TextButton")({
 		Name: `Tab_${tab.id}`,

@@ -59,7 +59,7 @@ export interface TextBoxProps extends Fusion.PropertyTable<Frame> {
 	 * If provided, the TextBox will be controlled by this state.
 	 * @example playerNameState, searchQueryState
 	 */
-	value?: Fusion.StateObject<string>;
+	value?: Fusion.Value<string>;
 
 	/** 
 	 * Whether this is a multiline text input.
@@ -88,7 +88,7 @@ export interface TextBoxProps extends Fusion.PropertyTable<Frame> {
 	 * Can be reactive for dynamic disable states.
 	 * @default false
 	 */
-	disabled?: Fusion.StateObject<boolean> | boolean;
+	disabled?: Fusion.Value<boolean> | boolean;
 
 	/** 
 	 * Input validation function.
