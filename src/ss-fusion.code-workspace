@@ -2,12 +2,19 @@
 	"folders": [
 		{
 			"path": ".."
-		},
-		{
-			"path": "../../package-game-test"
 		}
 	],
 	"settings": {
-		"typescript.tsdk": "node_modules/typescript/lib"
+		"typescript.tsdk": "node_modules/typescript/lib",
+		"mcp": {
+			"servers": {
+				"roblox-ts-mcp": {
+					"type": "stdio",
+					"command": "node",
+					"args": ["dist/server.js"]
+				}
+			},
+			"inputs": []
+		}
 	}
 }
