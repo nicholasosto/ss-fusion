@@ -5,6 +5,44 @@ All notable changes to SS-Fusion will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2025-08-09
+
+### Added
+- **IconButton**: Enhanced icon button component with selection states, hover effects, and size variants
+- **CloseButton**: Minimalist close control with theme integration and hover effects
+- **MessageBox**: Notification system component with automatic type-based styling (info, success, warning, error)
+- **TitleBar**: Window header component combining title text with optional close button functionality
+
+### Enhanced
+- **CooldownButton**: Completely rewritten with better theme integration, size variants, and improved visual feedback
+  - Added theme color variants (primary, secondary, accent, error, success, warning)
+  - Added size variants (small, medium, large) 
+  - Improved cooldown visualization with better progress bar integration
+  - Added callbacks for cooldown completion and hover events
+  - Better disabled state handling
+
+### Improved
+- All new components fully integrate with the ss-fusion theme system
+- Consistent size variants across all components (small, medium, large)
+- Enhanced color variant support using the central theme system
+- Better TypeScript interfaces extending BaseProps and InteractableProps
+- Comprehensive JSDoc documentation for all new components
+
+### Documentation
+- Added NEW_COMPONENTS.md with complete usage examples
+- Provided comprehensive examples showing component combinations
+- Added theme integration documentation and examples
+
+### Migration
+- Successfully integrated components from migration-to-ss-fusion folder
+- Removed game-specific dependencies and made components package-ready
+- Enhanced with ss-fusion theming system while preserving functionality
+- Updated package exports to include all new components
+
+### Breaking Changes
+- CooldownButton interface has been updated with new props structure
+- Some CooldownButton props have been renamed for consistency with other components
+
 ## [1.0.3] - 2025-08-06
 
 ## [1.1.0] - 2025-08-08
