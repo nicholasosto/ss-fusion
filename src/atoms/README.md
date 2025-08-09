@@ -13,41 +13,35 @@ Each atom is designed to:
 
 ## Available Atoms
 
-### � Avatar
-User profile images, player thumbnails, and fallback displays with multiple shapes and status indicators.
+### Avatar
+Roblox user thumbnails with shape and border options. Defaults to the local player's UserId when not provided.
 
 ```typescript
-import { Avatar } from "ss-fusion";
+import { Avatar } from "ss-fusion/atoms";
 
-// Player thumbnail
-const playerAvatar = Avatar({
-  UserId: 123456,
-  Size: new UDim2(0, 64, 0, 64),
-  Shape: "Circle",
-  ShowStatus: true,
-  StatusColor: Color3.fromRGB(34, 197, 94) // Green for online
+// Local player, circular, medium preset (~100x100)
+const me = Avatar({ size: "medium", shape: "circle" });
+
+// Specific user, square, border, explicit 64px
+const other = Avatar({
+  userId: 123456,
+  shape: "square",
+  showBorder: true,
+  borderColor: Color3.fromRGB(200, 200, 200),
+  Size: UDim2.fromOffset(64, 64)
 });
 
-// Custom image avatar
-const customAvatar = Avatar({
-  Image: "rbxasset://textures/face.png",
-  Size: new UDim2(0, 48, 0, 48),
-  Shape: "Rounded",
-  BorderThickness: 2,
-  BorderColor: Color3.fromRGB(99, 102, 241)
-});
-
-// Fallback text avatar
-const textAvatar = Avatar({
-  FallbackText: "JD",
-  BackgroundColor: Color3.fromHex("#6366f1"),
-  TextColor: Color3.new(1, 1, 1),
-  Size: new UDim2(0, 40, 0, 40)
+// Rounded, large preset, with custom placeholder
+const withPlaceholder = Avatar({
+  size: "large",
+  shape: "rounded",
+  placeholderImage: ImageConstants.DefaultUnassigned,
 });
 ```
 
-**Shapes**: `Circle` | `Square` | `Rounded`
-**Features**: Player thumbnails, custom images, fallback text, status indicators, borders
+**Shapes**: `circle` | `square` | `rounded`
+
+**Sizes**: `small` (48) | `medium` (100) | `large` (180)
 
 ### �🔘 Button
 Unified button component supporting both text and icon modes with multiple variants.
@@ -72,6 +66,7 @@ const settingsButton = Button({
 ```
 
 **Variants**: `primary` | `secondary` | `accent` | `danger` | `ghost` | `icon`
+
 **Sizes**: `small` | `medium` | `large`
 
 ### 📝 Label
@@ -91,6 +86,7 @@ const description = Label({
   text: playerDescription,
   variant: "body",
   textColor: Color3.fromRGB(200, 200, 200)
+ 
 });
 ```
 
@@ -117,8 +113,10 @@ const xpBar = ProgressBar({
   showLabel: true
 });
 ```
+ 
 
 **Modes**: Percentage (0-1) or Absolute (current/max)
+
 **Directions**: `horizontal` | `vertical`
 
 ### ✏️ TextBox
@@ -139,6 +137,7 @@ const emailInput = TextBox({
   validate: (text) => text.includes("@"),
   variant: "error" // Shows red border if validation fails
 });
+ 
 ```
 
 **Variants**: `default` | `error` | `success`
@@ -165,6 +164,7 @@ const panel = SlicedImage({
 ```
 
 ## Usage Patterns
+ 
 
 ### Reactive State
 All atoms support Fusion's reactive state system:
@@ -188,20 +188,31 @@ playerHealth.set(75); // Bar immediately reflects the change
 ### Theme Integration
 Atoms automatically use theme colors but allow overrides:
 
+
 ```typescript
+
+ 
 // Uses theme colors
+
 const button = Button({
   text: "Default",
+
   variant: "primary" // Uses theme Primary color
 });
 
+
 // Custom colors
+
 const customButton = Button({
   text: "Custom",
+
   backgroundImage: "rbxassetid://123",
   iconColor: Color3.fromRGB(255, 100, 100)
+
 });
 ```
+
+
 
 ### Composition
 Atoms are designed to work well together:
@@ -209,10 +220,13 @@ Atoms are designed to work well together:
 ```typescript
 // User profile example using multiple atoms
 const createUserProfile = (userId: number) => {
+
   const username = Value("Player123");
   const isOnline = Value(true);
+
   const health = Value(85);
   const maxHealth = Value(100);
+
   
   return [
     // Profile header with avatar
@@ -262,6 +276,7 @@ Choose variants that match the semantic meaning:
 
 ### 2. Maintain Consistency
 Use consistent sizing and spacing:
+
 ```typescript
 // Good - consistent sizing
 const buttons = [
@@ -278,6 +293,7 @@ const badButtons = [
 
 ### 3. Leverage Reactive State
 Use Fusion's reactive system for dynamic UIs:
+
 ```typescript
 const isLoading = Value(false);
 const buttonText = Computed(() => isLoading.get() ? "Loading..." : "Submit");
@@ -291,6 +307,7 @@ const submitButton = Button({
 
 ### 4. Validate User Input
 Always validate user input in TextBox components:
+
 ```typescript
 const passwordInput = TextBox({
   placeholder: "Password",
@@ -345,6 +362,7 @@ const iconBtn = Button({ icon: "rbxassetid://123", variant: "icon" });
 ## Contributing
 
 When creating new atoms:
+
 1. Follow the single responsibility principle
 2. Use theme colors by default with override options
 3. Provide comprehensive TypeScript interfaces

@@ -89,37 +89,41 @@ SS-Fusion follows the **Atomic Design** methodology, providing components at dif
 
 ### Avatar Component
 
-User profile images, player thumbnails, and fallback displays with customizable shapes and status indicators.
+User profile images (Roblox thumbnails) with customizable shape and border. Defaults to the local player's UserId when none is provided.
 
 ```typescript
-// Player thumbnail with status
-const playerAvatar = Avatar({
-  UserId: 123456,
-  Size: new UDim2(0, 64, 0, 64),
-  Shape: "Circle",
-  ShowStatus: true,
-  StatusColor: Color3.fromRGB(34, 197, 94), // Green for online
-  onClick: () => openPlayerProfile(123456)
+import { Avatar } from "@trembus/ss-fusion";
+import { Value } from "@rbxts/fusion";
+
+// Local player, 64x64, circular
+const me = Avatar({ size: "medium", shape: "circle" });
+
+// Specific user, square, bordered, explicit size
+const other = Avatar({
+  userId: 123456,
+  shape: "square",
+  showBorder: true,
+  borderColor: Color3.fromRGB(200, 200, 200),
+  Size: UDim2.fromOffset(64, 64)
 });
 
-// Custom image avatar
-const customAvatar = Avatar({
-  Image: "rbxasset://textures/face.png",
-  Shape: "Rounded",
-  BorderThickness: 2,
-  BorderColor: Color3.fromRGB(99, 102, 241)
-});
+// Reactive user switching
+const current = Value(123456);
+const dynamicAvatar = Avatar({ userId: current, size: "large", shape: "rounded" });
+current.set(789012); // updates the image
 
-// Fallback text avatar
-const initialsAvatar = Avatar({
-  FallbackText: "JD",
-  BackgroundColor: Color3.fromHex("#6366f1"),
-  TextColor: Color3.new(1, 1, 1)
-});
+// Custom placeholder while loading/failure
+const withPlaceholder = Avatar({ placeholderImage: ImageConstants.DefaultUnassigned });
 ```
 
-**Available Shapes:** `Circle` | `Square` | `Rounded`
-**Features:** Player thumbnails, custom images, fallback text, status indicators, click handling
+Props summary:
+
+- `userId?`: `number` | `Value<number>` (defaults to LocalPlayer.UserId)
+- `size?`: `"small" | "medium" | "large"` (maps to 48/100/180)
+- `shape?`: `"circle" | "rounded" | "square"`
+- `showBorder?`: `boolean`; `borderColor?`: `Color3`
+- `thumbnailType?`: `Enum.ThumbnailType` (default HeadShot)
+- `placeholderImage?`: `string`; `backgroundColor?`: `Color3`
 
 ### Button Component
 
@@ -170,7 +174,7 @@ const description = Label({
 });
 ```
 
-**Available Variants:** `heading` | `subheading` | `body` | `caption`
+**Available Variants:** `heading` | `body` | `caption` | `small`
 
 ### TextBox Component
 

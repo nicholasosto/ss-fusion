@@ -45,3 +45,4 @@ export * from "./SlicedImage";
 export * from "./TabButton";
 export * from "./Badge";
 export * from "./TabButton";
+export * from "./Avatar";
