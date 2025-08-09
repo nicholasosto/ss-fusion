@@ -1,0 +1,13 @@
+{
+  "servers": {
+    "roblox-ts-mcp": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"roblox-ts-mcp@1.1.0"
+			],
+			"gallery": true
+		}
+  }
+}
