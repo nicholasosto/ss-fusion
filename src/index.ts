@@ -21,3 +21,7 @@ export * from "./organisms";
 
 // Export additional types
 export * from "./types/tabs";
+
+// Export layout primitives
+export * from "./layout/Stack";
+export * from "./layout/Grid";

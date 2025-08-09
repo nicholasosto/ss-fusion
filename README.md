@@ -234,6 +234,88 @@ const abilityButton = CooldownButton({
 });
 ```
 
+## 🧭 Layout Primitives
+
+SS-Fusion includes simple layout helpers to compose UIs quickly and consistently.
+
+### HStack and VStack
+
+Horizontal/vertical stacks built on UIListLayout with gap, padding, alignment, and justification.
+
+```typescript
+import { HStack, VStack, Spacer } from "@trembus/ss-fusion";
+
+// Row: avatar, name, flexible spacer, action button
+const header = HStack({
+  gap: 8,
+  align: "center",
+  children: [
+    Avatar({ size: "small", shape: "circle" }),
+    Label({ text: "Player123", variant: "heading" }),
+    Spacer({ direction: "row" }), // pushes the button to the far end
+    Button({ text: "Invite", variant: "primary" }),
+  ],
+});
+
+// Column: title, description, actions
+const column = VStack({
+  gap: 12,
+  padding: 8,
+  align: "start",
+  children: [
+    Label({ text: "Quest", variant: "heading" }),
+    Label({ text: "Defeat 10 skeletons", variant: "body" }),
+    HStack({ gap: 8, children: [Button({ text: "Track" }), Button({ text: "Abandon", variant: "danger" })] }),
+  ],
+});
+```
+
+Props (Stack):
+
+- `direction`: `"row" | "column"` (use `HStack`/`VStack` helpers)
+- `gap?`: `number` spacing between children
+- `padding?`: `number` for all sides
+- `align?`: `"start" | "center" | "end"` (cross-axis)
+- `justify?`: `"start" | "center" | "end" | "spaceBetween"` (main-axis)
+
+### Spacer
+
+Flexible (or fixed) gap used inside stacks to push or separate content.
+
+```typescript
+// Fixed 16px spacer in a vertical stack
+VStack({ gap: 8, children: [Label({ text: "Top" }), Spacer({ direction: "column", size: 16 }), Label({ text: "Bottom" })] });
+```
+
+### Grid and AutoGrid
+
+Uniform grid layout using UIGridLayout. AutoGrid picks a cell size based on container width.
+
+```typescript
+import { Grid, AutoGrid } from "@trembus/ss-fusion";
+
+// Fixed-size cells
+const inventory = Grid({
+  cellSize: UDim2.fromOffset(64, 64),
+  cellPadding: UDim2.fromOffset(8, 8),
+  children: items.map((it) => renderSlot(it)),
+});
+
+// Responsive cells (min/max), recomputes on container resize
+const responsive = AutoGrid({
+  cellPadding: UDim2.fromOffset(8, 8),
+  minCellPx: 72,
+  maxCellPx: 128,
+  children: items.map((it) => renderSlot(it)),
+});
+```
+
+Notes:
+
+- Stacks default to AutomaticSize on the cross-axis; set `Size` if you need fixed dimensions.
+- AutoGrid listens for container width changes via `AbsoluteSize`.
+- Internally, some components (e.g., TabBar, CooldownButton) leverage these layout primitives.
+
 ## 🎨 Theming
 
 SS-Fusion comes with a comprehensive theming system that ensures visual consistency.

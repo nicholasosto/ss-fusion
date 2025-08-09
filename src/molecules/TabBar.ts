@@ -1,6 +1,7 @@
 import Fusion, { Children, ForPairs, New } from "@rbxts/fusion";
 import { TabSpec } from "../types/tabs";
 import { TabButton } from "../atoms/TabButton";
+import { HStack, VStack } from "../layout/Stack";
 
 export interface TabBarProps {
 	tabs: TabSpec[];
@@ -9,21 +10,16 @@ export interface TabBarProps {
 }
 
 export function TabBar(props: TabBarProps) {
-	return New("Frame")({
+	const size = props.vertical ? new UDim2(0, 140, 1, 0) : new UDim2(1, 0, 0, 36);
+	const StackComp = props.vertical ? VStack : HStack;
+	return StackComp({
 		Name: "TabBar",
 		BackgroundTransparency: 1,
-		Size: props.vertical ? new UDim2(0, 140, 1, 0) : new UDim2(1, 0, 0, 36),
+		Size: size,
 		AutomaticSize: props.vertical ? Enum.AutomaticSize.X : Enum.AutomaticSize.Y,
-		[Children]: [
-			New("UIListLayout")({
-				FillDirection: props.vertical ? Enum.FillDirection.Vertical : Enum.FillDirection.Horizontal,
-				HorizontalAlignment: Enum.HorizontalAlignment.Left,
-				VerticalAlignment: Enum.VerticalAlignment.Center,
-				Padding: new UDim(0, 6),
-				SortOrder: Enum.SortOrder.LayoutOrder,
-			}),
-
-			ForPairs(props.tabs, (_i, tab) => $tuple(tab.id, TabButton(tab, props.active))),
-		],
+		gap: 6,
+		align: props.vertical ? "start" : "center",
+		justify: "start",
+		children: [ForPairs(props.tabs, (_i, tab) => $tuple(tab.id, TabButton(tab, props.active))) as unknown as Instance],
 	});
 }

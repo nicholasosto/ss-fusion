@@ -5,7 +5,8 @@
  */
 
 import Fusion, { Value, New, Computed, OnEvent, Children } from "@rbxts/fusion";
-import { UI_SIZES, LAYOUTS } from "../types/ui-constants";
+import { UI_SIZES } from "../types/ui-constants";
+import { VStack } from "../layout/Stack";
 /* -- Atoms -- */
 import { Button, ProgressBar } from "../atoms";
 
@@ -71,16 +72,19 @@ export function CooldownButton(props: CooldownButtonProps) {
 		labelColor: Color3.fromRGB(255, 255, 255),
 	});
 
-	return New("Frame")({
+	return VStack({
 		Name: `${props.Name ?? "CooldownButton"}`,
 		Size: UI_SIZES.BUTTON_COOLDOWN,
 		ZIndex: props.ZIndex ?? 1,
-		BackgroundTransparency: 1, // Transparent background
+		BackgroundTransparency: 1,
+		gap: 2,
+		align: "center",
+		justify: "start",
 		[OnEvent("MouseEnter")]: () => {
 			isHovered.set(true);
-			props.onHover?.(); // Call hover handler if provided
+			props.onHover?.();
 		},
 		[OnEvent("MouseLeave")]: () => isHovered.set(false),
-		[Children]: [LAYOUTS.Vertical(2), button, cooldownBar],
+		children: [button, cooldownBar],
 	});
 }
