@@ -177,7 +177,7 @@ export function CooldownButton(props: CooldownButtonProps) {
 
 	// Icon button
 	const IconButtonComponent = New("ImageButton")({
-		Name: "CooldownButtonIcon",
+		Name: "CooldownButtonIconX",
 		Size: sizes.button,
 		Position: new UDim2(0, 0, 0, 0),
 		BackgroundColor3: Computed(() => {
