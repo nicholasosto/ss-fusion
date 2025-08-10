@@ -5,6 +5,17 @@ All notable changes to SS-Fusion will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.2] - 2025-08-10
+
+### Fixed
+- Package entry now points to `out/init.luau` (roblox-ts v3 output) instead of `out/init.lua`, fixing import/resolve errors when used as a dependency.
+
+### Added
+- CooldownButton: optional cooldown bar label support via `showCooldownLabel`, `cooldownLabelText`, and `cooldownLabelColor`.
+
+### Internal
+- Minor docs alignment with current ProgressBar and CooldownButton APIs.
+
 ## [2.1.0] - 2025-08-09
 
 ### Added

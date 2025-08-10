@@ -47,7 +47,7 @@ const maxHealth = Value(100);
 
 // Create components
 const healthBar = ProgressBar({
-  progress: playerHealth,
+  currentValue: playerHealth,
   maxValue: maxHealth,
   fillColor: Color3.fromRGB(255, 100, 100),
   showLabel: true
@@ -206,7 +206,7 @@ Flexible progress visualization supporting both percentage and absolute values.
 ```typescript
 // Health bar with absolute values
 const healthBar = ProgressBar({
-  progress: currentHealth,
+  currentValue: currentHealth,
   maxValue: maxHealth,
   fillColor: Color3.fromRGB(255, 100, 100),
   showLabel: true,
@@ -215,7 +215,7 @@ const healthBar = ProgressBar({
 
 // XP bar with percentage
 const xpBar = ProgressBar({
-  progress: expPercentage, // 0.0 to 1.0
+  currentValue: expPercentage, // 0.0 to 1.0
   fillColor: Color3.fromRGB(100, 255, 100),
   showLabel: true,
   labelText: customExpText
@@ -234,6 +234,16 @@ const abilityButton = CooldownButton({
     castAbility();
     // Cooldown automatically starts
   }
+});
+
+// Show a label on the cooldown bar
+const labeledAbilityButton = CooldownButton({
+  icon: "rbxassetid://ability-icon",
+  cooldown: 10,
+  showCooldownLabel: true,
+  // Optional
+  // cooldownLabelText: Value("Ready in..."),
+  // cooldownLabelColor: Color3.fromRGB(255,255,255),
 });
 ```
 
@@ -372,13 +382,13 @@ const createPlayerStatsUI = (player: Player) => {
   return [
     Label({ text: `${player.name} - Level ${stats.level.get()}` }),
     ProgressBar({
-      progress: stats.health,
+  currentValue: stats.health,
       maxValue: stats.maxHealth,
       fillColor: Color3.fromRGB(255, 100, 100),
       showLabel: true
     }),
     ProgressBar({
-      progress: stats.mana,
+  currentValue: stats.mana,
       maxValue: stats.maxMana,
       fillColor: Color3.fromRGB(100, 100, 255),
       showLabel: true
