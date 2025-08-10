@@ -34,7 +34,6 @@
  * @see {@link ./README.md} For detailed usage documentation
  * @see {@link ./CHANGELOG.md} For version history and migration guides
  * @see {@link ./atoms.d.ts} For complete API reference
- * @version 2.0.0
  */
 
 export * from "./Button";
