@@ -5,7 +5,8 @@
 import Fusion, { Children, Computed, New, Value } from "@rbxts/fusion";
 
 export interface GridProps extends Fusion.PropertyTable<Frame> {
-  cellSize: UDim2;
+  // Accept raw UDim2 or any Fusion binding/computed producing UDim2
+  cellSize: UDim2 | unknown;
   cellPadding?: UDim2;
   fillDirectionMaxCells?: number; // for wrapping
   fillDirection?: Enum.FillDirection;
@@ -15,7 +16,8 @@ export interface GridProps extends Fusion.PropertyTable<Frame> {
 
 export function Grid(props: GridProps) {
   const grid = New("UIGridLayout")({
-    CellSize: props.cellSize,
+  // Fusion will handle bindings at runtime; TS typing kept permissive here
+  CellSize: props.cellSize as UDim2,
     CellPadding: props.cellPadding ?? new UDim2(0, 8, 0, 8),
     FillDirectionMaxCells: props.fillDirectionMaxCells ?? 0,
     FillDirection: props.fillDirection ?? Enum.FillDirection.Horizontal,
@@ -61,14 +63,17 @@ export function AutoGrid(props: AutoGridProps) {
     return new UDim2(0, px, 0, px);
   });
 
-  const container = Grid({ ...props, cellSize: cellSize.get() });
+  const container = Grid({ ...props, cellSize });
 
   // Track AbsoluteSize to recompute cell size
-  container.GetPropertyChangedSignal("AbsoluteSize").Connect(() => {
-    widthState.set(container.AbsoluteSize.X);
-  });
-  // Initialize
-  widthState.set(container.AbsoluteSize.X);
+  const updateWidth = () => widthState.set(container.AbsoluteSize.X);
+  const conn = container.GetPropertyChangedSignal("AbsoluteSize").Connect(updateWidth);
+  if ((container as unknown as Instance).Destroying) {
+    (container as unknown as Instance).Destroying.Connect(() => conn.Disconnect());
+  }
+  // Initialize after parented (AbsoluteSize is 0 until mounted); also try now
+  task.defer(updateWidth);
+  updateWidth();
 
   return container;
 }

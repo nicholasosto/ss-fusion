@@ -52,6 +52,12 @@ export interface CooldownButtonProps extends BaseProps, InteractableProps {
 	onCooldownComplete?: () => void;
 	/** Whether the button is initially disabled */
 	initiallyDisabled?: boolean;
+	/** Whether to show a label on the cooldown progress bar */
+	showCooldownLabel?: boolean;
+	/** Optional custom label text for the cooldown bar */
+	cooldownLabelText?: Fusion.Value<string> | Fusion.Computed<string>;
+	/** Optional label color for the cooldown bar */
+	cooldownLabelColor?: Color3;
 }
 
 /**
@@ -222,14 +228,18 @@ export function CooldownButton(props: CooldownButtonProps) {
 	});
 
 	// Progress bar for cooldown
+	const baseBarHeight = sizes.progressBar.Y.Offset;
+	const effectiveBarHeight = props.showCooldownLabel ? math.max(baseBarHeight, 14) : baseBarHeight;
 	const CooldownProgressBar = ProgressBar({
-		Size: sizes.progressBar,
-		Position: new UDim2(0, 0, 1, -sizes.progressBar.Y.Offset - spacing.xs),
+		Size: new UDim2(1, 0, 0, effectiveBarHeight),
+		Position: new UDim2(0, 0, 1, -effectiveBarHeight - spacing.xs),
 		currentValue: cooldownRemaining,
 		maxValue: Value(props.cooldown),
 		fillColor: themeColors.progress,
 		direction: "horizontal",
-		showLabel: false,
+		showLabel: props.showCooldownLabel ?? false,
+		labelText: props.cooldownLabelText,
+		labelColor: props.cooldownLabelColor,
 	});
 
 	// Main container

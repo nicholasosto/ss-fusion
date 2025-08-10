@@ -9,6 +9,9 @@
 
 SS-Fusion is a comprehensive UI component library designed specifically for Roblox games, built with modern development practices and following the Atomic Design methodology. It provides a set of reusable, themeable, and type-safe components that make building consistent game UIs effortless.
 
+> See also: Component Status Tracker — docs/COMPONENT_STATUS.md
+> And the companion Component TODO Tracker — docs/COMPONENT_TODOS.md
+
 ## ✨ Features
 
 - 🎨 **Consistent Theming** - Built-in color schemes and design tokens

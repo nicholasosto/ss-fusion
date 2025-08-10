@@ -24,6 +24,7 @@ function toHorizontalAlignment(justify: Justify) {
       return Enum.HorizontalAlignment.Center;
     case "end":
       return Enum.HorizontalAlignment.Right;
+    // UIListLayout cannot truly implement space-between. Fallback to Left.
     default:
       return Enum.HorizontalAlignment.Left;
   }
@@ -35,6 +36,29 @@ function toVerticalAlignment(align: Align) {
       return Enum.VerticalAlignment.Center;
     case "end":
       return Enum.VerticalAlignment.Bottom;
+    default:
+      return Enum.VerticalAlignment.Top;
+  }
+}
+
+function toHorizontalAlignmentFromAlign(align: Align) {
+  switch (align) {
+    case "center":
+      return Enum.HorizontalAlignment.Center;
+    case "end":
+      return Enum.HorizontalAlignment.Right;
+    default:
+      return Enum.HorizontalAlignment.Left;
+  }
+}
+
+function toVerticalAlignmentFromJustify(justify: Justify) {
+  switch (justify) {
+    case "center":
+      return Enum.VerticalAlignment.Center;
+    case "end":
+      return Enum.VerticalAlignment.Bottom;
+    // UIListLayout cannot truly implement space-between. Fallback to Top.
     default:
       return Enum.VerticalAlignment.Top;
   }
@@ -53,8 +77,13 @@ export function Stack(props: StackProps) {
     FillDirection: horizontal ? Enum.FillDirection.Horizontal : Enum.FillDirection.Vertical,
     Padding: new UDim(0, gap),
     SortOrder: Enum.SortOrder.LayoutOrder,
-    HorizontalAlignment: horizontal ? toHorizontalAlignment(justify) : Enum.HorizontalAlignment.Left,
-    VerticalAlignment: toVerticalAlignment(align),
+    // Main-axis alignment uses `justify`, cross-axis uses `align`
+    HorizontalAlignment: horizontal
+      ? toHorizontalAlignment(justify)
+      : toHorizontalAlignmentFromAlign(align),
+    VerticalAlignment: horizontal
+      ? toVerticalAlignment(align)
+      : toVerticalAlignmentFromJustify(justify),
   });
 
   const container = New("Frame")({
@@ -63,7 +92,8 @@ export function Stack(props: StackProps) {
     BackgroundColor3: props.BackgroundColor3,
     BorderSizePixel: props.BorderSizePixel ?? 0,
     Size: props.Size ?? UDim2.fromScale(1, 0),
-    AutomaticSize: horizontal ? Enum.AutomaticSize.X : Enum.AutomaticSize.Y,
+    // Auto-size on the CROSS axis by default (doc expectation)
+    AutomaticSize: horizontal ? Enum.AutomaticSize.Y : Enum.AutomaticSize.X,
     Position: props.Position,
     AnchorPoint: props.AnchorPoint,
     ZIndex: props.ZIndex,
@@ -81,15 +111,8 @@ export function Stack(props: StackProps) {
     ],
   });
 
-  // spaceBetween emulation: add flexible spacers before/after children
-  if (justify === "spaceBetween" && props.children && props.children.size() > 1) {
-    const spacerBefore = Spacer({ direction });
-    const spacerAfter = Spacer({ direction });
-    spacerBefore.LayoutOrder = -1;
-    spacerAfter.LayoutOrder = 1_000_000; // large to sort after
-    spacerBefore.Parent = container;
-    spacerAfter.Parent = container;
-  }
+  // Note: true space-between distribution is not supported by UIListLayout.
+  // If requested, we gracefully fall back via the alignment mapping above.
 
   return container;
 }
