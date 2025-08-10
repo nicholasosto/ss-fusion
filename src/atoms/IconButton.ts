@@ -171,6 +171,28 @@ export function IconButton(props: IconButtonProps) {
 		},
 	});
 
+	const BackgroundTransparency = Computed(() => {
+		if (isPressed.get()) {
+			return 0.3;
+		} else if (isHovered.get()) {
+			return 0.5;
+		} else {
+			return 1;
+		}
+	});
+
+	const backgroundColor = Computed(() => {
+		if (isSelected.get()) {
+			return themeColors.background;
+		} else if (isPressed.get()) {
+			return themeColors.background.Lerp(Color3.fromRGB(0, 0, 0), 0.2);
+		} else if (isHovered.get()) {
+			return themeColors.background;
+		} else {
+			return themeColors.background.Lerp(Color3.fromRGB(128, 128, 128), 0.3);
+		}
+	});
+
 	// Main Button Component
 	const buttonComponent = New("ImageButton")({
 		Name: "IconButton",
@@ -182,7 +204,8 @@ export function IconButton(props: IconButtonProps) {
 		Visible: props.Visible,
 		Image: props.backgroundImage ?? defaultBackground,
 		ImageTransparency: props.backgroundImage ? 0 : 1,
-		BackgroundTransparency: 1,
+		BackgroundTransparency: BackgroundTransparency,
+		BackgroundColor3: backgroundColor,
 		AutoButtonColor: false,
 		[Children]: {
 			SelectionHighlight: SelectionHighlight,

@@ -101,8 +101,8 @@ export function CloseButton(props: CloseButtonProps): ImageButton | TextButton {
 		return New("ImageButton")({
 			Name: "CloseButton",
 			Size: props.Size ?? sizeConfig[size],
-			Position: props.Position,
-			AnchorPoint: props.AnchorPoint ?? new Vector2(1, 0),
+			Position: props.Position ?? new UDim2(1, 0, 0, 0),
+			AnchorPoint: props.AnchorPoint ?? new Vector2(0.5, 0.5),
 			LayoutOrder: props.LayoutOrder,
 			ZIndex: props.ZIndex,
 			Visible: props.Visible,
