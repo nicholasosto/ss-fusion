@@ -1,0 +1,28 @@
+{
+  "name": "ss-fusion-tests",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "node_modules": {
+        "$className": "Folder",
+        "@rbxts": {
+          "$path": "node_modules/@rbxts"
+        }
+      }
+      ,
+      "TS": {
+        "$path": "../ss-fusion-tests-out"
+      }
+    },
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "Tests": {
+          "$path": "../ss-fusion-tests-out/tests"
+        }
+      }
+    }
+  }
+}

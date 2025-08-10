@@ -34,6 +34,7 @@ import Fusion, { Value, New, Computed, OnEvent, Children, Observer } from "@rbxt
 import { defaultColorScheme, spacing } from "../utils/theme";
 import { SizeVariant, ColorVariant, BaseProps, InteractableProps } from "../types/common";
 import { ProgressBar } from "../atoms/ProgressBar";
+import { ImageConstants } from "types";
 
 export interface CooldownButtonProps extends BaseProps, InteractableProps {
 	/** Icon asset ID to display */
@@ -193,11 +194,21 @@ export function CooldownButton(props: CooldownButtonProps) {
 		BackgroundTransparency: 0.1,
 		BorderSizePixel: 0,
 		AutoButtonColor: false,
-		Image: props.icon,
+		Image: ImageConstants.Ability.Background,
 		ImageColor3: Computed(() => 
 			canClick.get() ? Color3.fromRGB(255, 255, 255) : Color3.fromRGB(160, 160, 160)
 		),
 		ImageTransparency: Computed(() => canClick.get() ? 0 : 0.5),
+		[Children]: {
+			Icon: New("ImageLabel")({
+				Size: UDim2.fromScale(0.8, 0.8),
+				Position: UDim2.fromScale(0.5, 0.5),
+				AnchorPoint: new Vector2(0.5, 0.5),
+				Image: props.icon,
+				ImageColor3: Computed(() => canClick.get() ? Color3.fromRGB(255, 255, 255) : Color3.fromRGB(160, 160, 160)),
+				ImageTransparency: Computed(() => canClick.get() ? 0 : 0.5),
+			}),
+		},
 		[OnEvent("MouseEnter")]: () => {
 			if (canClick.get()) {
 				isHovered.set(true);

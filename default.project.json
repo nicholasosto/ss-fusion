@@ -1,0 +1,14 @@
+{
+  "name": "ss-fusion-lib",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "TS": { "$path": "out" },
+      "node_modules": {
+        "$className": "Folder",
+        "@rbxts": { "$path": "node_modules/@rbxts" }
+      }
+    }
+  }
+}
