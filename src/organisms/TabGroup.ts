@@ -1,5 +1,5 @@
 import Fusion, { Children, New, Value } from "@rbxts/fusion";
-import { TabGroupProps } from "../types/tabs";
+import { TabGroupProps } from "../../../package-testing/src/client/ui/types/tabs";
 import { TabBar } from "../molecules/TabBar";
 import { TabPanels } from "../molecules/TabPanels";
 

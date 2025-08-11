@@ -26,6 +26,6 @@
 	},
 	"include": ["src"],
 	"exclude": [
-		"src/migration-to-ss-fusion/**/*", "out","dist","node_modules"
+		"out","dist","node_modules"
 	]
 }

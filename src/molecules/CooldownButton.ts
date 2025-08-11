@@ -31,8 +31,8 @@
  */
 
 import Fusion, { Value, New, Computed, OnEvent, Children, Observer } from "@rbxts/fusion";
-import { defaultColorScheme, spacing } from "../utils/theme";
-import { SizeVariant, ColorVariant, BaseProps, InteractableProps } from "../types/common";
+import { defaultColorScheme, spacing } from "../../../package-testing/src/client/ui/utils/theme";
+import { SizeVariant, ColorVariant, BaseProps, InteractableProps } from "../../../package-testing/src/client/ui/types/common";
 import { ProgressBar } from "../atoms/ProgressBar";
 import { ImageConstants } from "types";
 

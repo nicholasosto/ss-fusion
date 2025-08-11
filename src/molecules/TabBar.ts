@@ -1,7 +1,7 @@
 import Fusion, { Children, ForPairs, New } from "@rbxts/fusion";
-import { TabSpec } from "../types/tabs";
+import { TabSpec } from "../../../package-testing/src/client/ui/types/tabs";
 import { TabButton } from "../atoms/TabButton";
-import { HStack, VStack } from "../layout/Stack";
+import { HStack, VStack } from "../../../package-testing/src/client/ui/layout/Stack";
 
 export interface TabBarProps {
 	tabs: TabSpec[];

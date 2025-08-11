@@ -22,7 +22,7 @@
 
 import Fusion, { Value } from "@rbxts/fusion";
 import { Label, Button, TextBox, ProgressBar, SlicedImage } from "../atoms";
-import { ImageConstants, MenuButtonImageMap } from "../types/image-assets";
+import { ImageConstants, MenuButtonImageMap } from "../../../package-testing/src/client/ui/types/image-assets";
 
 /**
  * Creates a comprehensive UI demo showcasing all SS-Fusion atoms.

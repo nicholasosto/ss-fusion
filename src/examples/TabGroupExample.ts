@@ -1,6 +1,6 @@
 import Fusion, { New, Value } from "@rbxts/fusion";
 import { TabGroup } from "../organisms/TabGroup";
-import { TabSpec } from "../types/tabs";
+import { TabSpec } from "../../../package-testing/src/client/ui/types/tabs";
 
 /**
  * Simple example demonstrating the TabGroup organism.
