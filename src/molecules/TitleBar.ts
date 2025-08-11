@@ -30,8 +30,8 @@
  */
 
 import Fusion, { Children, New, Value, Computed } from "@rbxts/fusion";
-import { defaultColorScheme, spacing, borderRadiusValues, fontSizes } from "../../../package-testing/src/client/ui/utils/theme";
-import { ColorVariant, BaseProps } from "../../../package-testing/src/client/ui/types/common";
+import { defaultColorScheme, spacing, borderRadiusValues, fontSizes } from "../utils/theme";
+import { ColorVariant, BaseProps } from "../types";
 import { CloseButton } from "../atoms/CloseButton";
 
 export interface TitleBarProps extends BaseProps {
