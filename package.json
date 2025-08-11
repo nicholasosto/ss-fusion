@@ -1,6 +1,6 @@
 {
   "name": "@trembus/ss-fusion",
-  "version": "2.1.8",
+  "version": "2.2.0",
   "description": "A modern, reactive UI component library for Roblox built with TypeScript and Fusion",
   "main": "out/init.luau",
   "types": "index.d.ts",
