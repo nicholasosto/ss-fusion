@@ -207,6 +207,7 @@ export function CooldownButton(props: CooldownButtonProps) {
 				Image: props.icon,
 				ImageColor3: Computed(() => canClick.get() ? Color3.fromRGB(255, 255, 255) : Color3.fromRGB(160, 160, 160)),
 				ImageTransparency: Computed(() => canClick.get() ? 0 : 0.5),
+				BackgroundTransparency: 1,
 			}),
 		},
 		[OnEvent("MouseEnter")]: () => {
