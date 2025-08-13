@@ -4,6 +4,15 @@
   "description": "A modern, reactive UI component library for Roblox built with TypeScript and Fusion",
   "main": "out/init.luau",
   "types": "index.d.ts",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicholasosto/ss-fusion.git"
+  },
+  "homepage": "https://github.com/nicholasosto/ss-fusion#readme",
+  "bugs": {
+    "url": "https://github.com/nicholasosto/ss-fusion/issues"
+  },
   "scripts": {
     "build": "rbxtsc",
     "watch": "rbxtsc -w",
@@ -41,7 +50,10 @@
   },
   "files": [
     "out",
-    "index.d.ts"
+  "index.d.ts",
+  "VERSIONS.md",
+  "CHANGELOG.md",
+  "LICENSE"
   ],
   "publishConfig": {
     "access": "public"
