@@ -11,6 +11,7 @@ SS-Fusion is a comprehensive UI component library designed specifically for Robl
 
 > See also: Component Status Tracker — docs/COMPONENT_STATUS.md
 > And the companion Component TODO Tracker — docs/COMPONENT_TODOS.md
+> Versions index — [VERSIONS.md](./VERSIONS.md)
 
 ## ✨ Features
 
