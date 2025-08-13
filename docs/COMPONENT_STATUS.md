@@ -32,6 +32,7 @@ How to verify:
 | IconButton | Beta |  | 2.1.0 | 2.1.0 | [Source](../src/atoms/IconButton.ts) • [Examples](./NEW_COMPONENTS.md#iconbutton) | Migrated; theming + states |
 | CloseButton | Beta |  | 2.1.0 | 2.1.0 | [Source](../src/atoms/CloseButton.ts) • [Examples](./NEW_COMPONENTS.md#closebutton) | Migrated; minimalist control |
 | MessageBox | Beta |  | 2.1.0 | 2.1.0 | [Source](../src/atoms/MessageBox.ts) • [Examples](./NEW_COMPONENTS.md#messagebox) | Verified; notification system |
+| DragHandle | Experimental |  | 2.2.3 | 2.2.3 | [Source](../src/atoms/DragHandle.ts) | UIDragDetector-based handle |
 
 ---
 
@@ -43,6 +44,8 @@ How to verify:
 | TabBar | Stable |  | 1.1.0 | 1.1.0 | [Source](../src/molecules/TabBar.ts) | Tab navigation |
 | TabPanels | Stable |  | 1.1.0 | 1.1.0 | [Source](../src/molecules/TabPanels.ts) | Tab content mounting modes |
 | TitleBar | Beta |  | 2.1.0 | 2.1.0 | [Source](../src/molecules/TitleBar.ts) • [Examples](./NEW_COMPONENTS.md#titlebar) | Migrated; with CloseButton |
+| Draggable | Experimental |  | 2.2.3 | 2.2.3 | [Source](../src/molecules/Draggable.ts) | UIDragDetector wrapper |
+| DropZone | Experimental |  | 2.2.3 | 2.2.3 | [Source](../src/molecules/DropZone.ts) | DragManager aware |
 
 ---
 
@@ -51,6 +54,7 @@ How to verify:
 | Component | Status | Verified | Introduced | Last Updated | Docs | Notes |
 |---|---|---:|---:|---:|---|---|
 | TabGroup | Stable |  | 1.1.0 | 1.1.0 | [Source](../src/organisms/TabGroup.ts) | Complete tab system |
+| PanelWindow | Beta |  | 2.2.3 | 2.2.3 | [Source](../src/organisms/PanelWindow.ts) | Composes TitleBar + Panel |
 
 ---
 

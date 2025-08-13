@@ -261,6 +261,62 @@ const customButton = CloseButton({
 });
 ```
 
+## Drag & Drop Primitives
+
+### DragHandle
+
+Emit drag deltas without moving the parent. Great for window title bars.
+
+```ts
+import { DragHandle } from "@trembus/ss-fusion/atoms";
+
+const handle = DragHandle({
+  Size: UDim2.fromOffset(300, 32),
+  onDelta: (d) => (window.Position = new UDim2(
+    window.Position.X.Scale + d.X.Scale,
+    window.Position.X.Offset + d.X.Offset,
+    window.Position.Y.Scale + d.Y.Scale,
+    window.Position.Y.Offset + d.Y.Offset
+  )),
+});
+```
+
+### Draggable
+
+Let a UI element move directly with the pointer using UIDragDetector.
+
+```ts
+import { Draggable } from "@trembus/ss-fusion/molecules";
+
+const gem = Draggable({
+  responseStyle: Enum.UIDragDetectorResponseStyle.Offset,
+  boundingUI: screenGui,
+});
+```
+
+### DropZone
+
+Declarative drop area that accepts specific payload types.
+
+```ts
+import { DropZone } from "@trembus/ss-fusion/molecules";
+
+const zone = DropZone({
+  accepts: ["item"],
+  onDrop: (payload) => print("Dropped", payload.data),
+});
+```
+
+### PanelWindow
+
+Window-like container composed from Panel + TitleBar. Pair with DragHandle to make it draggable.
+
+```ts
+import { PanelWindow } from "@trembus/ss-fusion/organisms";
+
+const win = PanelWindow({ titleLabel: "Inventory", closeButton: true });
+```
+
 ## Size Variants
 
 All components support consistent size variants:

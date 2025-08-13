@@ -79,13 +79,18 @@ SS-Fusion follows the **Atomic Design** methodology, providing components at dif
 - **`TextBox`** - Input component with validation and focus states
 - **`ProgressBar`** - Progress visualization for health, mana, XP, etc.
 - **`SlicedImage`** - 9-slice scalable images for panels and borders
+- **`DragHandle`** - Title-bar style drag area that emits movement deltas (UIDragDetector)
 
 ### Molecules (Component Combinations)
 
 - **`CooldownButton`** - Button with integrated cooldown timer and progress bar
+- **`TitleBar`** - Window header with title and optional close
+- **`Draggable`** - Wrap any UI with a UIDragDetector for simple drag behavior
+- **`DropZone`** - Declarative drop target with accept rules and feedback
 
-### Organisms & Templates (Coming Soon)
+### Organisms & Templates
 
+- **`PanelWindow`** - Window-like panel: TitleBar + content area, optional close
 - Complex UI sections and layout templates
 
 ## 📋 Components Overview
@@ -398,6 +403,54 @@ const createPlayerStatsUI = (player: Player) => {
 ```
 
 ### Ability Hotbar
+
+## 🖱️ Drag & Drop (UIDragDetector)
+
+Roblox’s UIDragDetector enables cursor/touch-driven manipulation of 2D UI. SS‑Fusion exposes a few small primitives to make this ergonomic.
+
+Important: UIDragDetector is currently a Studio beta feature — enable it via File > Beta Features > UIDragDetectors to test locally.
+
+Components:
+
+- DragHandle (atom): A non-moving handle that emits deltas; ideal for moving windows by their title bar.
+- Draggable (molecule): Adds a detector to let the object move directly (Offset/Scale) or via Scriptable/constraints.
+- DropZone (molecule): Declarative drop area with accepts rules (string[] or predicate) and enter/leave/drop callbacks.
+- PanelWindow (organism): Compose TitleBar + content; pair with DragHandle for draggable windows.
+
+Simple examples:
+
+```ts
+import { PanelWindow } from "@trembus/ss-fusion/organisms";
+import { DragHandle } from "@trembus/ss-fusion/atoms";
+import { Draggable, DropZone } from "@trembus/ss-fusion/molecules";
+import * as Drag from "@trembus/ss-fusion/utils/drag";
+
+// Make a window and move it by dragging the title area
+const win = PanelWindow({ titleLabel: "Inventory", closeButton: true });
+DragHandle({
+  Size: UDim2.fromOffset(300, 32),
+  onDelta: (d) => (win.Position = new UDim2(
+    win.Position.X.Scale + d.X.Scale,
+    win.Position.X.Offset + d.X.Offset,
+    win.Position.Y.Scale + d.Y.Scale,
+    win.Position.Y.Offset + d.Y.Offset
+  )),
+  Parent: win,
+});
+
+// A draggable item that publishes a payload
+const item = Draggable({
+  responseStyle: Enum.UIDragDetectorResponseStyle.Offset,
+  onDragStart: (pos) => Drag.startDrag({ type: "item", data: { id: "red-gem" } }, pos),
+  onDrag: Drag.update,
+  onDragEnd: Drag.endDrag,
+});
+
+// A drop zone that accepts items
+const zone = DropZone({ accepts: ["item"], onDrop: (p) => print("Dropped", p.data) });
+```
+
+See a complete working example in `src/examples/drag-demo.ts`.
 
 ```typescript
 import { CooldownButton } from "@trembus/ss-fusion";
