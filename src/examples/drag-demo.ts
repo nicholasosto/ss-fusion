@@ -52,9 +52,7 @@ const item = Draggable({
   Position: new UDim2(0, 24, 0, 24),
   responseStyle: Enum.UIDragDetectorResponseStyle.Offset,
   boundingUI: screenGui,
-  onDragStart: (pos) => Drag.startDrag({ type: "item", data: { id: "red-gem" } }, pos),
-  onDrag: (pos) => Drag.update(pos),
-  onDragEnd: () => Drag.endDrag(),
+  payload: { type: "item", data: { id: "red-gem" } },
   children: [
     New("UICorner")({ CornerRadius: new UDim(0, 8) }),
     New("UIStroke")({ Color: Color3.fromRGB(255, 0, 0), Thickness: 2 }),

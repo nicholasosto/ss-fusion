@@ -3,6 +3,7 @@
  * Wrap a child with a UIDragDetector and expose handy props/events.
  */
 import Fusion, { New, Children as FChildren, OnEvent } from "@rbxts/fusion";
+import * as Drag from "../utils/drag";
 
 export interface DraggableProps extends Fusion.PropertyTable<Frame> {
   /** The element to make draggable (detector parent); if omitted, we create a container Frame. */
@@ -17,6 +18,8 @@ export interface DraggableProps extends Fusion.PropertyTable<Frame> {
   dragAxis?: Vector2;
   boundingUI?: GuiBase2d;
   enabled?: boolean;
+  /** Optional payload to auto-publish via utils/drag. If provided, Draggable will call Drag.start/update/end for you. */
+  payload?: Drag.DragPayload;
   /** Events */
   onDragStart?: (input: Vector2) => void;
   onDrag?: (input: Vector2) => void;
@@ -54,9 +57,19 @@ export function Draggable(props: DraggableProps): GuiObject {
     DragAxis: props.dragAxis,
     BoundingUI: props.boundingUI,
     Enabled: props.enabled ?? true,
-    [OnEvent("DragStart")]: (pos: Vector2) => props.onDragStart?.(pos),
-    [OnEvent("DragContinue")]: (pos: Vector2) => props.onDrag?.(pos),
-    [OnEvent("DragEnd")]: (pos: Vector2) => props.onDragEnd?.(pos),
+    [OnEvent("DragStart")]: (pos: Vector2) => {
+      // Auto-publish payload if provided
+      if (props.payload) Drag.startDrag(props.payload, pos, target);
+      props.onDragStart?.(pos);
+    },
+    [OnEvent("DragContinue")]: (pos: Vector2) => {
+      if (props.payload) Drag.update(pos);
+      props.onDrag?.(pos);
+    },
+    [OnEvent("DragEnd")]: (pos: Vector2) => {
+      if (props.payload) Drag.endDrag();
+      props.onDragEnd?.(pos);
+    },
   });
 
   // Register constraints/scripted behavior
