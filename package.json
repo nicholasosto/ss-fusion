@@ -1,6 +1,6 @@
 {
   "name": "@trembus/ss-fusion",
-  "version": "2.2.3-alpha.0",
+  "version": "2.3.0-alpha.0",
   "description": "A modern, reactive UI component library for Roblox built with TypeScript and Fusion",
   "main": "out/init.luau",
   "types": "index.d.ts",
@@ -34,26 +34,50 @@
   },
   "typesVersions": {
     "*": {
-      "atoms": ["out/atoms/index.d.ts"],
-      "atoms/*": ["out/atoms/*"],
-      "molecules": ["out/molecules/index.d.ts"],
-      "molecules/*": ["out/molecules/*"],
-      "organisms": ["out/organisms/index.d.ts"],
-      "organisms/*": ["out/organisms/*"],
-      "types": ["out/types/index.d.ts"],
-      "types/*": ["out/types/*"],
-      "layout/*": ["out/layout/*"],
-      "utils/*": ["out/utils/*"],
-      "examples/*": ["out/examples/*"],
-      "*": ["out/*"]
+      "atoms": [
+        "out/atoms/index.d.ts"
+      ],
+      "atoms/*": [
+        "out/atoms/*"
+      ],
+      "molecules": [
+        "out/molecules/index.d.ts"
+      ],
+      "molecules/*": [
+        "out/molecules/*"
+      ],
+      "organisms": [
+        "out/organisms/index.d.ts"
+      ],
+      "organisms/*": [
+        "out/organisms/*"
+      ],
+      "types": [
+        "out/types/index.d.ts"
+      ],
+      "types/*": [
+        "out/types/*"
+      ],
+      "layout/*": [
+        "out/layout/*"
+      ],
+      "utils/*": [
+        "out/utils/*"
+      ],
+      "examples/*": [
+        "out/examples/*"
+      ],
+      "*": [
+        "out/*"
+      ]
     }
   },
   "files": [
     "out",
-  "index.d.ts",
-  "VERSIONS.md",
-  "CHANGELOG.md",
-  "LICENSE"
+    "index.d.ts",
+    "VERSIONS.md",
+    "CHANGELOG.md",
+    "LICENSE"
   ],
   "publishConfig": {
     "access": "public"
