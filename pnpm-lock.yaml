@@ -11,6 +11,9 @@ importers:
       '@rbxts/fusion':
         specifier: ^0.2.0
         version: 0.2.0
+      '@rbxts/services':
+        specifier: ^1.0.865
+        version: 1.5.5
     devDependencies:
       '@rbxts/compiler-types':
         specifier: 3.0.0-types.0
@@ -32,6 +35,9 @@ packages:
 
   '@rbxts/fusion@0.2.0':
     resolution: {integrity: sha512-Hs+IXSPM+5KE4FMKh+zyifG2+1EI8B0K1DA3gN6TncwiQxdVzz6XchxRVI/BTqto7uLBtEAVMQzhrkUneaJNIQ==}
+
+  '@rbxts/services@1.5.5':
+    resolution: {integrity: sha512-Hu7QH2ecefS60zpakKG3T2vgABydoOJqpSG7nXr59wFAbPk/cA+OcsntYPHUWyHAat0VFGZ5jNZLTLdiqfssvg==}
 
   '@rbxts/types@1.0.868':
     resolution: {integrity: sha512-pwVEzdw3Zy6FbCQywBEudYvw8yiUEhv0pUqMlqszb75gsMj8ltJ3dUkvsKKVix+H4uoNF/dKWnwIfpsfGCHwmg==}
@@ -244,6 +250,8 @@ snapshots:
   '@rbxts/compiler-types@3.0.0-types.0': {}
 
   '@rbxts/fusion@0.2.0': {}
+
+  '@rbxts/services@1.5.5': {}
 
   '@rbxts/types@1.0.868': {}
 

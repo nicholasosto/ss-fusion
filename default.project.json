@@ -2,6 +2,17 @@
   "name": "ss-fusion-lib",
   "tree": {
     "$className": "DataModel",
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "TS": { "$path": "out/server" }
+    },
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "TS": { "$path": "out/client" }
+      }
+    },
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
       "TS": { "$path": "out" },
