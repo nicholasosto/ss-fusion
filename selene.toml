@@ -1,0 +1,11 @@
+std = "roblox"
+
+# Ignore generated code and dependencies
+exclude = [
+	"out/**",
+	"node_modules/**",
+	"TestPlace.rbxlx"
+]
+
+# Optionally, limit linting to just source and test Luau (if any)
+include = ["src/**", "test/**"]

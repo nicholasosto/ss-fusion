@@ -1,9 +1,7 @@
 import { Players } from "@rbxts/services";
 import { PanelWindow, PanelWindowProps } from "organisms";
 
-/**
- * Client demo entry. Exported as default so a loader can require and run it.
- */
+/** Client demo entry. */
 export default function runClientDemo() {
   const player = Players.LocalPlayer;
   const playerGui = player.WaitForChild("PlayerGui") as PlayerGui;

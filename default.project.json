@@ -10,12 +10,14 @@
       "$className": "StarterPlayer",
       "StarterPlayerScripts": {
         "$className": "StarterPlayerScripts",
-        "TS": { "$path": "out/client" }
+        "TS": { "$path": "out/client" },
+  "Bootstrap": { "$path": "test/bootstrap.client.luau" }
       }
     },
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
       "TS": { "$path": "out" },
+      "rbxts_runtime": { "$path": "node_modules/roblox-ts/include" },
       "node_modules": {
         "$className": "Folder",
         "@rbxts": { "$path": "node_modules/@rbxts" }

@@ -84,13 +84,14 @@
   },
   "devDependencies": {
     "@rbxts/compiler-types": "3.0.0-types.0",
-    "@rbxts/types": "^1.0.868",
+    "@rbxts/types": "^1.0.877",
+    "@types/node": "^24.3.0",
     "roblox-ts": "^3.0.0",
     "typescript": "^5.9.2"
   },
   "dependencies": {
     "@rbxts/fusion": "^0.2.0",
-    "@rbxts/services": "^1.0.865"
+    "@rbxts/services": "^1.5.5"
   },
   "packageManager": "pnpm@10.13.1"
 }
